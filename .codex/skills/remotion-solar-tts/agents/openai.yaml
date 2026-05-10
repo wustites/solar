@@ -1,0 +1,4 @@
+interface:
+  display_name: "Remotion Solar TTS"
+  short_description: "Build narrated Remotion solar-system videos with Edge TTS."
+  default_prompt: "Create or update a narrated Remotion solar-system video using Three.js visuals and Edge TTS voiceover."
