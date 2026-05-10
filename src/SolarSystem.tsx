@@ -8,7 +8,7 @@ import {
   useVideoConfig
 } from 'remotion';
 import * as THREE from 'three';
-import {narrationSegments} from './narration';
+import {Language, locales} from './narration';
 
 type PlanetSpec = {
   name: string;
@@ -37,6 +37,9 @@ const planets: PlanetSpec[] = [
   {name: 'Uranus', radius: 0.6, distance: 14.5, color: '#84d6df', speed: 0.78, tilt: 0.65},
   {name: 'Neptune', radius: 0.58, distance: 16.6, color: '#426ce4', speed: 0.62, tilt: 0.22}
 ];
+
+const fontFamily =
+  'Inter, "Noto Sans CJK SC", "Noto Sans CJK JP", "Noto Sans CJK KR", "Noto Sans SC", "Noto Sans JP", "Noto Sans KR", "Microsoft YaHei", "Yu Gothic", "Malgun Gothic", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
 
 const createRandom = (seed: number) => {
   let state = seed;
@@ -118,14 +121,20 @@ const disposeObject = (object: THREE.Object3D) => {
   });
 };
 
-const getActiveSegment = (frame: number) => {
+type SolarSystemProps = {
+  language: Language;
+};
+
+const getActiveSegment = (frame: number, language: Language) => {
+  const segments = locales[language].segments;
+
   return (
-    narrationSegments.find((segment) => frame >= segment.start && frame < segment.end) ??
-    narrationSegments[narrationSegments.length - 1]
+    segments.find((segment) => frame >= segment.start && frame < segment.end) ??
+    segments[segments.length - 1]
   );
 };
 
-export const SolarSystem: React.FC = () => {
+export const SolarSystem: React.FC<SolarSystemProps> = ({language}) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
@@ -134,7 +143,8 @@ export const SolarSystem: React.FC = () => {
   const planetRefs = useRef<PlanetRuntime[]>([]);
   const frame = useCurrentFrame();
   const {width, height, durationInFrames} = useVideoConfig();
-  const activeSegment = getActiveSegment(frame);
+  const locale = locales[language];
+  const activeSegment = getActiveSegment(frame, language);
   const segmentProgress = interpolate(
     frame,
     [activeSegment.start, activeSegment.start + 24, activeSegment.end - 24, activeSegment.end],
@@ -299,7 +309,7 @@ export const SolarSystem: React.FC = () => {
       return;
     }
 
-    const active = getActiveSegment(frame);
+    const active = getActiveSegment(frame, language);
     const progress = frame / durationInFrames;
     const cameraSweep = progress * Math.PI * 2;
     const target = new THREE.Vector3(0, 0, 0);
@@ -360,11 +370,11 @@ export const SolarSystem: React.FC = () => {
     camera.lookAt(target);
 
     renderer.render(scene, camera);
-  }, [durationInFrames, frame]);
+  }, [durationInFrames, frame, language]);
 
   return (
     <AbsoluteFill style={{backgroundColor: '#02040b'}}>
-      <Audio src={staticFile('voiceover/solar-system-introduction.mp3')} volume={0.96} />
+      <Audio src={staticFile(locale.audioFile)} volume={0.96} />
       <canvas
         ref={canvasRef}
         width={width}
@@ -389,8 +399,7 @@ export const SolarSystem: React.FC = () => {
             opacity: titleOpacity,
             transform: `translateY(${titleY}px)`,
             color: '#f7fbff',
-            fontFamily:
-              'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+            fontFamily,
             textShadow: '0 10px 34px rgba(0,0,0,0.45)'
           }}
         >
@@ -403,7 +412,7 @@ export const SolarSystem: React.FC = () => {
               marginBottom: 14
             }}
           >
-            Remotion / Three.js
+            {locale.heroKicker} / {locale.languageLabel}
           </div>
           <div
             style={{
@@ -413,7 +422,7 @@ export const SolarSystem: React.FC = () => {
               letterSpacing: 0
             }}
           >
-            Solar System
+            {locale.heroTitle}
           </div>
         </div>
       </AbsoluteFill>
@@ -431,8 +440,7 @@ export const SolarSystem: React.FC = () => {
             transform: `translateY(${interpolate(segmentProgress, [0, 1], [12, 0])}px)`,
             width: 620,
             color: '#f7fbff',
-            fontFamily:
-              'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+            fontFamily,
             textShadow: '0 10px 32px rgba(0,0,0,0.5)'
           }}
         >

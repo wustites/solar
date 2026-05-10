@@ -1,6 +1,6 @@
 # Solar
 
-A Remotion + Three.js animation of a stylized 3D solar system.
+A Remotion + Three.js animation of a stylized 3D solar system with Edge TTS narration in English, Chinese, Japanese, and Korean.
 
 ## Scripts
 
@@ -11,8 +11,9 @@ npm run voiceover
 npm run render
 ```
 
-The main composition is `SolarSystem` and renders to `out/solar-system.mp4`.
-The narration source is `public/voiceover/narration.txt`; `npm run voiceover`
-regenerates the Edge TTS MP3 used by the composition.
+The main compositions are `SolarSystemEN`, `SolarSystemZH`, `SolarSystemJA`, and `SolarSystemKO`.
+`npm run render` renders all four MP4 files into `out/`.
+The narration sources are `public/voiceover/narration.{lang}.txt`; `npm run voiceover`
+regenerates the ignored Edge TTS MP3 files used by the compositions.
 
 See `workflow.md` for the full build, narration, validation, and render workflow.

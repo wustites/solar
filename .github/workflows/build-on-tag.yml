@@ -35,7 +35,8 @@ jobs:
       - name: Install system packages
         run: |
           sudo apt-get update
-          sudo apt-get install -y ffmpeg
+          sudo apt-get install -y ffmpeg fonts-noto-cjk fonts-noto-color-emoji
+          fc-cache -f -v
 
       - name: Install Node dependencies
         run: npm ci
@@ -56,10 +57,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: solar-system-${{ github.ref_name }}
-          path: out/solar-system.mp4
+          path: out/*.mp4
           if-no-files-found: error
 
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: out/solar-system.mp4
+          files: out/*.mp4

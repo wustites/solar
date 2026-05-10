@@ -6,7 +6,12 @@
   "scripts": {
     "start": "remotion studio src/index.ts",
     "preview": "remotion preview src/index.ts",
-    "render": "remotion render src/index.ts SolarSystem out/solar-system.mp4",
+    "render": "npm run render:all",
+    "render:all": "npm run render:en && npm run render:zh && npm run render:ja && npm run render:ko",
+    "render:en": "remotion render src/index.ts SolarSystemEN out/solar-system-en.mp4",
+    "render:zh": "remotion render src/index.ts SolarSystemZH out/solar-system-zh.mp4",
+    "render:ja": "remotion render src/index.ts SolarSystemJA out/solar-system-ja.mp4",
+    "render:ko": "remotion render src/index.ts SolarSystemKO out/solar-system-ko.mp4",
     "typecheck": "tsc --noEmit",
     "voiceover": "python scripts/generate_voiceover.py"
   },
