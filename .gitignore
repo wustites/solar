@@ -141,3 +141,7 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Generated voiceover audio
+public/voiceover/*.mp3
+public/voiceover/*.vtt
