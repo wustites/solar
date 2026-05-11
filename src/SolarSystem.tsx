@@ -23,6 +23,8 @@ type PlanetSpec = {
 type PlanetRuntime = {
   group: THREE.Group;
   mesh: THREE.Mesh;
+  halo: THREE.Sprite;
+  orbit: THREE.LineLoop;
   spec: PlanetSpec;
   moons: THREE.Mesh[];
 };
@@ -98,6 +100,28 @@ const makeStarTexture = () => {
   return new THREE.CanvasTexture(canvas);
 };
 
+const makeGlowTexture = (inner: string, outer: string) => {
+  const canvas = document.createElement('canvas');
+  canvas.width = 256;
+  canvas.height = 256;
+  const context = canvas.getContext('2d');
+
+  if (!context) {
+    return null;
+  }
+
+  const gradient = context.createRadialGradient(128, 128, 0, 128, 128, 128);
+  gradient.addColorStop(0, inner);
+  gradient.addColorStop(0.38, inner);
+  gradient.addColorStop(1, outer);
+  context.fillStyle = gradient;
+  context.fillRect(0, 0, 256, 256);
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  return texture;
+};
+
 const createOrbitRing = (radius: number) => {
   const curve = new THREE.EllipseCurve(0, 0, radius, radius, 0, Math.PI * 2, false, 0);
   const points = curve.getPoints(192).map((point) => new THREE.Vector3(point.x, 0, point.y));
@@ -111,10 +135,48 @@ const createOrbitRing = (radius: number) => {
   return new THREE.LineLoop(geometry, material);
 };
 
+const createStarField = (count: number, size: number, opacity: number, seed: number) => {
+  const starGeometry = new THREE.BufferGeometry();
+  const starPositions: number[] = [];
+  const random = createRandom(seed);
+
+  for (let i = 0; i < count; i++) {
+    const radius = 38 + random() * 80;
+    const theta = random() * Math.PI * 2;
+    const phi = Math.acos(2 * random() - 1);
+    starPositions.push(
+      radius * Math.sin(phi) * Math.cos(theta),
+      radius * Math.cos(phi),
+      radius * Math.sin(phi) * Math.sin(theta)
+    );
+  }
+
+  starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starPositions, 3));
+  const starTexture = makeStarTexture();
+  const starMaterial = new THREE.PointsMaterial({
+    map: starTexture ?? undefined,
+    color: '#dce8ff',
+    size,
+    transparent: true,
+    opacity,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+
+  return new THREE.Points(starGeometry, starMaterial);
+};
+
 const disposeObject = (object: THREE.Object3D) => {
   object.traverse((child) => {
-    if (child instanceof THREE.Mesh || child instanceof THREE.Points || child instanceof THREE.Line) {
-      child.geometry.dispose();
+    if (
+      child instanceof THREE.Mesh ||
+      child instanceof THREE.Points ||
+      child instanceof THREE.Line ||
+      child instanceof THREE.Sprite
+    ) {
+      if ('geometry' in child) {
+        child.geometry.dispose();
+      }
       const materials = Array.isArray(child.material) ? child.material : [child.material];
       materials.forEach((material) => material.dispose());
     }
@@ -132,6 +194,11 @@ const getActiveSegment = (frame: number, language: Language) => {
     segments.find((segment) => frame >= segment.start && frame < segment.end) ??
     segments[segments.length - 1]
   );
+};
+
+const smoothstep = (value: number) => {
+  const clamped = Math.min(1, Math.max(0, value));
+  return clamped * clamped * (3 - 2 * clamped);
 };
 
 export const SolarSystem: React.FC<SolarSystemProps> = ({language}) => {
@@ -182,10 +249,13 @@ export const SolarSystem: React.FC<SolarSystemProps> = ({language}) => {
     renderer.setPixelRatio(1);
     renderer.setSize(width, height, false);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.12;
     rendererRef.current = renderer;
 
     const scene = new THREE.Scene();
     scene.background = new THREE.Color('#02040b');
+    scene.fog = new THREE.FogExp2('#02040b', 0.012);
     sceneRef.current = scene;
 
     const camera = new THREE.PerspectiveCamera(46, width / height, 0.1, 1000);
@@ -193,56 +263,55 @@ export const SolarSystem: React.FC<SolarSystemProps> = ({language}) => {
     camera.lookAt(0, 0, 0);
     cameraRef.current = camera;
 
-    scene.add(new THREE.AmbientLight('#5d7199', 0.6));
+    scene.add(new THREE.AmbientLight('#60789f', 0.48));
 
-    const sunLight = new THREE.PointLight('#fff5c8', 9, 55);
+    const sunLight = new THREE.PointLight('#fff2bf', 12, 64);
     sunLight.position.set(0, 0, 0);
     scene.add(sunLight);
 
+    const rimLight = new THREE.DirectionalLight('#7eb6ff', 1.4);
+    rimLight.position.set(-12, 9, 16);
+    scene.add(rimLight);
+
     const sunGeometry = new THREE.SphereGeometry(1.45, 72, 72);
-    const sunMaterial = new THREE.MeshBasicMaterial({color: '#ffd15c'});
+    const sunMaterial = new THREE.MeshBasicMaterial({color: '#ffe36d'});
     const sun = new THREE.Mesh(sunGeometry, sunMaterial);
     scene.add(sun);
     sunRef.current = sun;
 
-    const glow = new THREE.Mesh(
-      new THREE.SphereGeometry(1.9, 72, 72),
-      new THREE.MeshBasicMaterial({
-        color: '#ff8f3a',
+    const sunGlowTexture = makeGlowTexture('rgba(255,232,120,0.85)', 'rgba(255,122,30,0)');
+    const sunGlow = new THREE.Sprite(
+      new THREE.SpriteMaterial({
+        map: sunGlowTexture ?? undefined,
+        color: '#ffbf58',
         transparent: true,
-        opacity: 0.22,
+        opacity: 0.72,
+        depthWrite: false,
         blending: THREE.AdditiveBlending
       })
     );
-    scene.add(glow);
+    sunGlow.scale.setScalar(5.6);
+    scene.add(sunGlow);
 
-    const starTexture = makeStarTexture();
-    const starGeometry = new THREE.BufferGeometry();
-    const starPositions: number[] = [];
-    const random = createRandom(sceneSeed);
-    for (let i = 0; i < 1800; i++) {
-      const radius = 38 + random() * 70;
-      const theta = random() * Math.PI * 2;
-      const phi = Math.acos(2 * random() - 1);
-      starPositions.push(
-        radius * Math.sin(phi) * Math.cos(theta),
-        radius * Math.cos(phi),
-        radius * Math.sin(phi) * Math.sin(theta)
-      );
-    }
-    starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starPositions, 3));
-    const starMaterial = new THREE.PointsMaterial({
-      map: starTexture ?? undefined,
-      color: '#dce8ff',
-      size: 0.12,
-      transparent: true,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending
-    });
-    scene.add(new THREE.Points(starGeometry, starMaterial));
+    const outerGlow = new THREE.Sprite(
+      new THREE.SpriteMaterial({
+        map: sunGlowTexture ?? undefined,
+        color: '#ff7b35',
+        transparent: true,
+        opacity: 0.22,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending
+      })
+    );
+    outerGlow.scale.setScalar(9.5);
+    scene.add(outerGlow);
+
+    scene.add(createStarField(1700, 0.105, 0.62, sceneSeed));
+    scene.add(createStarField(420, 0.22, 0.48, sceneSeed + 41));
 
     planetRefs.current = planets.map((spec, planetIndex) => {
-      scene.add(createOrbitRing(spec.distance));
+      const orbit = createOrbitRing(spec.distance);
+      scene.add(orbit);
 
       const group = new THREE.Group();
       group.rotation.z = spec.tilt;
@@ -256,11 +325,24 @@ export const SolarSystem: React.FC<SolarSystemProps> = ({language}) => {
       const material = new THREE.MeshStandardMaterial({
         color: spec.color,
         map: texture ?? undefined,
-        roughness: 0.72,
-        metalness: 0.02
+        roughness: 0.62,
+        metalness: spec.name === 'Mercury' ? 0.12 : 0.04
       });
       const mesh = new THREE.Mesh(new THREE.SphereGeometry(spec.radius, 48, 48), material);
       group.add(mesh);
+
+      const haloTexture = makeGlowTexture('rgba(255,255,255,0.52)', 'rgba(255,255,255,0)');
+      const halo = new THREE.Sprite(
+        new THREE.SpriteMaterial({
+          map: haloTexture ?? undefined,
+          color: spec.color,
+          transparent: true,
+          opacity: 0,
+          depthWrite: false,
+          blending: THREE.AdditiveBlending
+        })
+      );
+      group.add(halo);
 
       if (spec.name === 'Saturn') {
         const ring = new THREE.Mesh(
@@ -286,7 +368,7 @@ export const SolarSystem: React.FC<SolarSystemProps> = ({language}) => {
         return moon;
       });
 
-      return {group, mesh, spec, moons};
+      return {group, mesh, halo, orbit, spec, moons};
     });
 
     return () => {
@@ -309,29 +391,47 @@ export const SolarSystem: React.FC<SolarSystemProps> = ({language}) => {
       return;
     }
 
+    const segments = locale.segments;
     const active = getActiveSegment(frame, language);
+    const activeIndex = segments.findIndex((segment) => segment.name === active.name);
     const progress = frame / durationInFrames;
     const cameraSweep = progress * Math.PI * 2;
     const target = new THREE.Vector3(0, 0, 0);
+    const previousTarget = new THREE.Vector3(0, 0, 0);
     let activeRadius = 1.45;
+    let previousRadius = 1.45;
+    const planetPositions = new Map<string, THREE.Vector3>();
 
     if (sunRef.current) {
       sunRef.current.rotation.y = frame * 0.012;
       const sunIsActive = active.name === 'Sun' || active.name === 'Finale';
-      const scale = (sunIsActive ? 1.1 : 1) + Math.sin(frame * 0.09) * 0.025;
+      const scale = (sunIsActive ? 1.16 : 1) + Math.sin(frame * 0.09) * 0.035;
       sunRef.current.scale.setScalar(scale);
     }
 
-    planetRefs.current.forEach(({group, mesh, moons, spec}, index) => {
+    planetRefs.current.forEach(({group, mesh, halo, moons, orbit, spec}, index) => {
       const planetIsActive = spec.name === active.name || active.name === 'Finale';
       const angle = frame * 0.008 * spec.speed + index * 0.52;
       mesh.position.set(Math.cos(angle) * spec.distance, 0, Math.sin(angle) * spec.distance);
       mesh.rotation.y = frame * 0.035 * (1.2 + index * 0.08);
-      mesh.scale.setScalar(planetIsActive ? 1.34 : 1);
+      planetPositions.set(spec.name, mesh.position.clone());
+
+      const pulse = 1 + Math.sin(frame * 0.08) * 0.035;
+      mesh.scale.setScalar(planetIsActive ? 1.32 * pulse : 1);
+      halo.position.copy(mesh.position);
+      halo.scale.setScalar(spec.radius * (planetIsActive ? 5.4 + Math.sin(frame * 0.07) * 0.3 : 3.2));
+      if (halo.material instanceof THREE.SpriteMaterial) {
+        halo.material.opacity = planetIsActive ? 0.46 : 0.05;
+      }
+
+      if (orbit.material instanceof THREE.LineBasicMaterial) {
+        orbit.material.color.set(planetIsActive ? spec.color : '#6e7ea0');
+        orbit.material.opacity = planetIsActive ? 0.76 : 0.18;
+      }
 
       if (mesh.material instanceof THREE.MeshStandardMaterial) {
         mesh.material.emissive.set(planetIsActive ? spec.color : '#000000');
-        mesh.material.emissiveIntensity = planetIsActive ? 0.18 : 0;
+        mesh.material.emissiveIntensity = planetIsActive ? 0.22 : 0;
       }
 
       if (spec.name === active.name) {
@@ -349,25 +449,42 @@ export const SolarSystem: React.FC<SolarSystemProps> = ({language}) => {
         );
       });
 
-      group.rotation.y = Math.sin(frame * 0.003 + index) * 0.03;
+      group.rotation.y = Math.sin(frame * 0.003 + index) * 0.04;
     });
+
+    const previousSegment = activeIndex > 0 ? segments[activeIndex - 1] : active;
+    const previousPlanetPosition = planetPositions.get(previousSegment.name);
+    if (previousPlanetPosition) {
+      previousTarget.copy(previousPlanetPosition);
+      previousRadius = planets.find((planet) => planet.name === previousSegment.name)?.radius ?? 1.45;
+    }
+
+    const transitionFrames = 30;
+    const transitionProgress = smoothstep((frame - active.start) / transitionFrames);
+    if (activeIndex > 0 && active.name !== 'Sun') {
+      target.lerpVectors(previousTarget, target, transitionProgress);
+      activeRadius = previousRadius + (activeRadius - previousRadius) * transitionProgress;
+    }
 
     const activeIsPlanet = active.name !== 'Sun' && active.name !== 'Finale';
     const cameraRadius = activeIsPlanet
-      ? Math.max(7, activeRadius * 8)
-      : interpolate(frame, [0, 240, 1220, durationInFrames], [24, 19, 21, 25], {
+      ? Math.max(6.2, activeRadius * 7.4)
+      : interpolate(frame, [0, 240, durationInFrames * 0.58, durationInFrames], [24, 18.5, 21, 26], {
           extrapolateLeft: 'clamp',
           extrapolateRight: 'clamp'
         });
     const wideOffset = active.name === 'Finale' ? 22 : 0;
-    const orbitAngle = cameraSweep * (activeIsPlanet ? 2.2 : 0.7);
+    const orbitAngle =
+      cameraSweep * (activeIsPlanet ? 2.05 : 0.7) + Math.sin(frame * 0.004) * 0.18;
 
     camera.position.set(
       target.x + Math.sin(orbitAngle) * cameraRadius + wideOffset,
-      target.y + (activeIsPlanet ? 2.8 + activeRadius * 3 : 9 + Math.sin(cameraSweep * 1.15) * 2.2),
+      target.y + (activeIsPlanet ? 2.4 + activeRadius * 2.8 : 8.8 + Math.sin(cameraSweep * 1.15) * 2.4),
       target.z + Math.cos(orbitAngle) * cameraRadius + (active.name === 'Finale' ? 18 : 0)
     );
     camera.lookAt(target);
+    camera.fov = activeIsPlanet ? 40 : 46;
+    camera.updateProjectionMatrix();
 
     renderer.render(scene, camera);
   }, [durationInFrames, frame, language]);
@@ -383,6 +500,14 @@ export const SolarSystem: React.FC<SolarSystemProps> = ({language}) => {
           width: '100%',
           height: '100%',
           display: 'block'
+        }}
+      />
+      <AbsoluteFill
+        style={{
+          background:
+            'radial-gradient(circle at 50% 44%, rgba(48,86,140,0.08) 0%, rgba(2,4,11,0) 42%), radial-gradient(circle at 0% 100%, rgba(255,163,72,0.12) 0%, rgba(2,4,11,0) 34%), linear-gradient(90deg, rgba(2,4,11,0.28) 0%, rgba(2,4,11,0) 34%, rgba(2,4,11,0.22) 100%)',
+          boxShadow: 'inset 0 0 180px rgba(0,0,0,0.72)',
+          pointerEvents: 'none'
         }}
       />
       <AbsoluteFill
@@ -465,6 +590,32 @@ export const SolarSystem: React.FC<SolarSystemProps> = ({language}) => {
           >
             {activeSegment.description}
           </div>
+        </div>
+      </AbsoluteFill>
+      <AbsoluteFill
+        style={{
+          justifyContent: 'flex-end',
+          padding: '0 72px 44px',
+          pointerEvents: 'none'
+        }}
+      >
+        <div
+          style={{
+            width: 360,
+            height: 3,
+            borderRadius: 999,
+            background: 'rgba(176,199,232,0.16)',
+            overflow: 'hidden'
+          }}
+        >
+          <div
+            style={{
+              width: `${Math.min(100, Math.max(0, (frame / durationInFrames) * 100))}%`,
+              height: '100%',
+              background: 'linear-gradient(90deg, #8bb8ff, #ffe08a)',
+              borderRadius: 999
+            }}
+          />
         </div>
       </AbsoluteFill>
     </AbsoluteFill>
