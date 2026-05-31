@@ -1,6 +1,6 @@
 # Remotion Solar System Workflow
 
-This project builds narrated 3D solar-system videos with Remotion, Three.js, and Edge TTS. It supports English, Chinese, Japanese, and Korean.
+This project builds narrated 3D solar-system videos with Remotion, Three.js, and configurable TTS. It supports English, Chinese, Japanese, and Korean.
 
 ## 1. Install
 
@@ -8,6 +8,9 @@ This project builds narrated 3D solar-system videos with Remotion, Three.js, and
 npm install
 python -m pip install edge-tts
 ```
+
+Google Cloud Text-to-Speech uses the Python standard library only, but it needs an
+API key through `GOOGLE_TTS_API_KEY` or `google-tts.key`.
 
 ## 2. Edit The Story
 
@@ -27,6 +30,25 @@ Keep the order as Sun, Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Nep
 npm run voiceover
 ```
 
+The active provider is configured in:
+
+```text
+voiceover.config.json
+```
+
+You can override it explicitly:
+
+```bash
+npm run voiceover:edge
+npm run voiceover:gcp
+```
+
+Or generate a single language:
+
+```bash
+python scripts/generate_voiceover.py --provider gcp --language ja
+```
+
 This creates ignored generated audio files:
 
 ```text
@@ -42,7 +64,10 @@ The generator script is:
 scripts/generate_voiceover.py
 ```
 
-It uses Edge TTS voices for each language and includes a Windows DNS resolver workaround for `aiohttp`.
+It can use either Edge TTS or Google Cloud Text-to-Speech voices for each language.
+The Edge TTS path includes a Windows DNS resolver workaround for `aiohttp`. The GCP
+path reads `GOOGLE_TTS_API_KEY` first, then the configured key file, which defaults
+to `google-tts.key`.
 
 ## 4. Match Duration
 
@@ -120,7 +145,7 @@ git tag v1.0.0
 git push origin v1.0.0
 ```
 
-The action installs Node and Python dependencies, `ffmpeg`, and Noto CJK fonts, regenerates all Edge TTS voiceovers, typechecks the project, renders all four Remotion videos, uploads the MP4 files as an artifact, and attaches them to the GitHub Release for that tag.
+The action installs Node and Python dependencies, `ffmpeg`, and Noto CJK fonts, regenerates all voiceovers with the configured provider, typechecks the project, renders all four Remotion videos, uploads the MP4 files as an artifact, and attaches them to the GitHub Release for that tag.
 
 ## Skill
 

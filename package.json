@@ -13,7 +13,9 @@
     "render:ja": "remotion render src/index.ts SolarSystemJA out/solar-system-ja.mp4",
     "render:ko": "remotion render src/index.ts SolarSystemKO out/solar-system-ko.mp4",
     "typecheck": "tsc --noEmit",
-    "voiceover": "python scripts/generate_voiceover.py"
+    "voiceover": "python scripts/generate_voiceover.py",
+    "voiceover:edge": "python scripts/generate_voiceover.py --provider edge-tts",
+    "voiceover:gcp": "python scripts/generate_voiceover.py --provider gcp"
   },
   "dependencies": {
     "@remotion/cli": "latest",

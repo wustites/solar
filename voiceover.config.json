@@ -1,0 +1,26 @@
+{
+  "provider": "edge-tts",
+  "voiceoverDir": "public/voiceover",
+  "languages": ["en", "zh", "ja", "ko"],
+  "providers": {
+    "edge-tts": {
+      "voices": {
+        "en": { "voice": "en-US-AriaNeural", "rate": "-4%" },
+        "zh": { "voice": "zh-CN-XiaoxiaoNeural", "rate": "-4%" },
+        "ja": { "voice": "ja-JP-NanamiNeural", "rate": "-4%" },
+        "ko": { "voice": "ko-KR-SunHiNeural", "rate": "-4%" }
+      }
+    },
+    "gcp": {
+      "apiKeyEnv": "GOOGLE_TTS_API_KEY",
+      "apiKeyFile": "google-tts.key",
+      "audioEncoding": "MP3",
+      "voices": {
+        "en": { "languageCode": "en-US", "voice": "en-US-Chirp3-HD-Aoede" },
+        "zh": { "languageCode": "cmn-CN", "voice": "cmn-CN-Chirp3-HD-Aoede" },
+        "ja": { "languageCode": "ja-JP", "voice": "ja-JP-Chirp3-HD-Aoede" },
+        "ko": { "languageCode": "ko-KR", "voice": "ko-KR-Chirp3-HD-Aoede" }
+      }
+    }
+  }
+}

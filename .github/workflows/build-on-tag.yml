@@ -46,6 +46,8 @@ jobs:
 
       - name: Generate voiceover
         run: npm run voiceover
+        env:
+          GOOGLE_TTS_API_KEY: ${{ secrets.GOOGLE_TTS_API_KEY }}
 
       - name: Typecheck
         run: npm run typecheck
