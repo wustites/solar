@@ -36,8 +36,8 @@ const planets: PlanetSpec[] = [
   {name: 'Mars', radius: 0.34, distance: 7.0, color: '#c85b3a', speed: 2.0, tilt: 0.12},
   {name: 'Jupiter', radius: 0.9, distance: 9.3, color: '#d3a36d', speed: 1.35, tilt: 0.05, moons: 3},
   {name: 'Saturn', radius: 0.78, distance: 12.0, color: '#d9c082', speed: 1.05, tilt: 0.2, moons: 2},
-  {name: 'Uranus', radius: 0.6, distance: 14.5, color: '#84d6df', speed: 0.78, tilt: 0.65},
-  {name: 'Neptune', radius: 0.58, distance: 16.6, color: '#426ce4', speed: 0.62, tilt: 0.22}
+  {name: 'Uranus', radius: 0.6, distance: 14.5, color: '#84d6df', speed: 0.78, tilt: 0.15},
+  {name: 'Neptune', radius: 0.58, distance: 16.6, color: '#426ce4', speed: 0.62, tilt: 0.12}
 ];
 
 const fontFamily =
@@ -507,7 +507,7 @@ export const SolarSystem: React.FC<SolarSystemProps> = ({language}) => {
 
     const activeIsPlanet = active.name !== 'Sun' && active.name !== 'Finale';
     const cameraRadius = activeIsPlanet
-      ? Math.max(5.8, activeRadius * 6.8)
+      ? Math.max(6.5, activeRadius * 7.5)
       : interpolate(frame, [0, 240, durationInFrames * 0.58, durationInFrames], [22, 16, 19, 24], {
           extrapolateLeft: 'clamp',
           extrapolateRight: 'clamp'
