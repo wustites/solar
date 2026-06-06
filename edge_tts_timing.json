@@ -1,0 +1,208 @@
+{
+  "en": {
+    "voice": "en-US-AriaNeural",
+    "rate": "-4%",
+    "total_duration": 76.4062516,
+    "timing": [
+      {
+        "type": "SentenceBoundary",
+        "offset": 0.1,
+        "duration": 3.9604167,
+        "text": "From the Sun, we begin our tour of the solar system."
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 4.0104167,
+        "duration": 6.7057293,
+        "text": "The Sun is our star: a glowing sphere of hot plasma whose gravity holds every planet in orbit."
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 10.716146,
+        "duration": 7.3437501,
+        "text": "Closest to the Sun is Mercury, the smallest planet, moving quickly through intense heat and long cold nights."
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 18.0598962,
+        "duration": 6.7968751,
+        "text": "Next is Venus, bright in our sky, wrapped in thick clouds and a powerful greenhouse atmosphere."
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 24.8567713,
+        "duration": 6.3671876,
+        "text": "Then comes Earth, our blue home, with liquid water, living systems, and one steady Moon."
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 31.223959,
+        "duration": 8.4765626,
+        "text": "Beyond Earth is Mars, the red planet, with dust storms, ancient river valleys, and the tallest volcano in the solar system."
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 39.7005217,
+        "duration": 7.5781251,
+        "text": "Farther out is Jupiter, the largest planet, a giant world with storms, bands of clouds, and many moons."
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 47.2786468,
+        "duration": 5.8984376,
+        "text": "Then Saturn appears, famous for its wide icy rings and soft golden color."
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 53.1770845,
+        "duration": 7.0703126,
+        "text": "Next is Uranus, a cold blue-green ice giant, tilted so far that it seems to roll around the Sun."
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 60.2473971,
+        "duration": 6.5885418,
+        "text": "At the edge of the major planets is Neptune, deep blue and windy, circling in the distant dark."
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 66.8359389,
+        "duration": 9.5703127,
+        "text": "Together they form our solar system: one star, eight planets, moons, rings, asteroids, comets, and the quiet rhythm of orbit."
+      }
+    ]
+  },
+  "zh": {
+    "voice": "zh-CN-XiaoxiaoNeural",
+    "rate": "-4%",
+    "total_duration": 92.56510610000001,
+    "timing": [
+      {
+        "type": "SentenceBoundary",
+        "offset": 0.1,
+        "duration": 3.8302084,
+        "text": "从太阳开始，我们开启一段太阳系之旅。"
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 3.8802084,
+        "duration": 2.109375,
+        "text": "太阳是我们的恒星。"
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 5.9895834,
+        "duration": 8.1770835,
+        "text": "它是一颗炽热等离子体组成的发光球体，用强大的引力让每一颗行星保持在轨道上。"
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 14.1666669,
+        "duration": 2.65625,
+        "text": "最靠近太阳的是水星。"
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 16.822917,
+        "duration": 5.9895834,
+        "text": "它是最小的行星，在强烈高温和漫长寒夜之间快速运行。"
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 22.8125005,
+        "duration": 1.71875,
+        "text": "接着是金星。"
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 24.5312505,
+        "duration": 6.7447918,
+        "text": "它在我们的天空中非常明亮，被厚厚的云层和强烈的温室大气包裹。"
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 31.2760423,
+        "duration": 1.796875,
+        "text": "然后是地球。"
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 33.0729174,
+        "duration": 8.3984376,
+        "text": "我们的蓝色家园拥有液态水、生命系统、一层保护性大气，以及一颗稳定相伴的月球。"
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 41.471355,
+        "duration": 2.1875,
+        "text": "地球之外是火星。"
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 43.6588551,
+        "duration": 6.0026043,
+        "text": "红色的火星有尘暴、古老河谷，以及太阳系中最高的火山。"
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 49.6614594,
+        "duration": 1.8880208,
+        "text": "再往外是木星。"
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 51.5494803,
+        "duration": 5.7812501,
+        "text": "它是最大的行星，拥有条纹云带、巨大风暴和许多卫星。"
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 57.3307304,
+        "duration": 2.3046875,
+        "text": "随后出现的是土星。"
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 59.6354179,
+        "duration": 4.5572917,
+        "text": "它以宽阔的冰质光环和柔和的金色而闻名。"
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 64.1927097,
+        "duration": 2.0963542,
+        "text": "接下来是天王星。"
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 66.2890639,
+        "duration": 6.8619793,
+        "text": "这颗寒冷的蓝绿色冰巨星倾斜得非常厉害，仿佛侧身绕着太阳滚动。"
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 73.1510433,
+        "duration": 3.2682292,
+        "text": "在主要行星的边缘，是海王星。"
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 76.4192725,
+        "duration": 5.0390626,
+        "text": "它深蓝而多风，在遥远的黑暗中环绕太阳运行。"
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 81.4583351,
+        "duration": 2.4479167,
+        "text": "它们共同组成太阳系。"
+      },
+      {
+        "type": "SentenceBoundary",
+        "offset": 83.9062518,
+        "duration": 8.6588543,
+        "text": "一颗恒星，八大行星，卫星、光环、小行星、彗星，以及安静而持续的轨道节奏。"
+      }
+    ]
+  }
+}

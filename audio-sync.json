@@ -1,0 +1,652 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-06-06T13:42:57.800379Z",
+  "fps": 30,
+  "languages": {
+    "en": {
+      "audioFile": "voiceover/solar-system-en.mp3",
+      "durationSeconds": 76.464,
+      "durationFrames": 2294,
+      "edgeTTSDuration": 76.4062516,
+      "segments": {
+        "Sun": {
+          "start": 3,
+          "end": 122
+        },
+        "Mercury": {
+          "start": 120,
+          "end": 321
+        },
+        "Venus": {
+          "start": 321,
+          "end": 542
+        },
+        "Earth": {
+          "start": 542,
+          "end": 746
+        },
+        "Mars": {
+          "start": 746,
+          "end": 937
+        },
+        "Jupiter": {
+          "start": 937,
+          "end": 1191
+        },
+        "Saturn": {
+          "start": 1191,
+          "end": 1418
+        },
+        "Uranus": {
+          "start": 1418,
+          "end": 1595
+        },
+        "Neptune": {
+          "start": 1595,
+          "end": 1807
+        },
+        "Finale": {
+          "start": 1807,
+          "end": 2005
+        }
+      },
+      "timing": [
+        {
+          "type": "SentenceBoundary",
+          "offset": 0.1,
+          "duration": 3.9604167,
+          "text": "From the Sun, we begin our tour of the solar system."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 4.0104167,
+          "duration": 6.7057293,
+          "text": "The Sun is our star: a glowing sphere of hot plasma whose gravity holds every planet in orbit."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 10.716146,
+          "duration": 7.3437501,
+          "text": "Closest to the Sun is Mercury, the smallest planet, moving quickly through intense heat and long cold nights."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 18.0598962,
+          "duration": 6.7968751,
+          "text": "Next is Venus, bright in our sky, wrapped in thick clouds and a powerful greenhouse atmosphere."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 24.8567713,
+          "duration": 6.3671876,
+          "text": "Then comes Earth, our blue home, with liquid water, living systems, and one steady Moon."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 31.223959,
+          "duration": 8.4765626,
+          "text": "Beyond Earth is Mars, the red planet, with dust storms, ancient river valleys, and the tallest volcano in the solar system."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 39.7005217,
+          "duration": 7.5781251,
+          "text": "Farther out is Jupiter, the largest planet, a giant world with storms, bands of clouds, and many moons."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 47.2786468,
+          "duration": 5.8984376,
+          "text": "Then Saturn appears, famous for its wide icy rings and soft golden color."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 53.1770845,
+          "duration": 7.0703126,
+          "text": "Next is Uranus, a cold blue-green ice giant, tilted so far that it seems to roll around the Sun."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 60.2473971,
+          "duration": 6.5885418,
+          "text": "At the edge of the major planets is Neptune, deep blue and windy, circling in the distant dark."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 66.8359389,
+          "duration": 9.5703127,
+          "text": "Together they form our solar system: one star, eight planets, moons, rings, asteroids, comets, and the quiet rhythm of orbit."
+        }
+      ]
+    },
+    "zh": {
+      "audioFile": "voiceover/solar-system-zh.mp3",
+      "durationSeconds": 103.824,
+      "durationFrames": 3115,
+      "edgeTTSDuration": 92.56510610000001,
+      "segments": {
+        "Sun": {
+          "start": 3,
+          "end": 118
+        },
+        "Mercury": {
+          "start": 116,
+          "end": 180
+        },
+        "Venus": {
+          "start": 180,
+          "end": 425
+        },
+        "Earth": {
+          "start": 425,
+          "end": 505
+        },
+        "Mars": {
+          "start": 505,
+          "end": 684
+        },
+        "Jupiter": {
+          "start": 684,
+          "end": 736
+        },
+        "Saturn": {
+          "start": 736,
+          "end": 938
+        },
+        "Uranus": {
+          "start": 938,
+          "end": 992
+        },
+        "Neptune": {
+          "start": 992,
+          "end": 1244
+        },
+        "Finale": {
+          "start": 1244,
+          "end": 1310
+        }
+      },
+      "timing": [
+        {
+          "type": "SentenceBoundary",
+          "offset": 0.1,
+          "duration": 3.8302084,
+          "text": "从太阳开始，我们开启一段太阳系之旅。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 3.8802084,
+          "duration": 2.109375,
+          "text": "太阳是我们的恒星。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 5.9895834,
+          "duration": 8.1770835,
+          "text": "它是一颗炽热等离子体组成的发光球体，用强大的引力让每一颗行星保持在轨道上。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 14.1666669,
+          "duration": 2.65625,
+          "text": "最靠近太阳的是水星。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 16.822917,
+          "duration": 5.9895834,
+          "text": "它是最小的行星，在强烈高温和漫长寒夜之间快速运行。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 22.8125005,
+          "duration": 1.71875,
+          "text": "接着是金星。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 24.5312505,
+          "duration": 6.7447918,
+          "text": "它在我们的天空中非常明亮，被厚厚的云层和强烈的温室大气包裹。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 31.2760423,
+          "duration": 1.796875,
+          "text": "然后是地球。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 33.0729174,
+          "duration": 8.3984376,
+          "text": "我们的蓝色家园拥有液态水、生命系统、一层保护性大气，以及一颗稳定相伴的月球。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 41.471355,
+          "duration": 2.1875,
+          "text": "地球之外是火星。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 43.6588551,
+          "duration": 6.0026043,
+          "text": "红色的火星有尘暴、古老河谷，以及太阳系中最高的火山。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 49.6614594,
+          "duration": 1.8880208,
+          "text": "再往外是木星。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 51.5494803,
+          "duration": 5.7812501,
+          "text": "它是最大的行星，拥有条纹云带、巨大风暴和许多卫星。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 57.3307304,
+          "duration": 2.3046875,
+          "text": "随后出现的是土星。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 59.6354179,
+          "duration": 4.5572917,
+          "text": "它以宽阔的冰质光环和柔和的金色而闻名。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 64.1927097,
+          "duration": 2.0963542,
+          "text": "接下来是天王星。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 66.2890639,
+          "duration": 6.8619793,
+          "text": "这颗寒冷的蓝绿色冰巨星倾斜得非常厉害，仿佛侧身绕着太阳滚动。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 73.1510433,
+          "duration": 3.2682292,
+          "text": "在主要行星的边缘，是海王星。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 76.4192725,
+          "duration": 5.0390626,
+          "text": "它深蓝而多风，在遥远的黑暗中环绕太阳运行。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 81.4583351,
+          "duration": 2.4479167,
+          "text": "它们共同组成太阳系。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 83.9062518,
+          "duration": 8.6588543,
+          "text": "一颗恒星，八大行星，卫星、光环、小行星、彗星，以及安静而持续的轨道节奏。"
+        }
+      ]
+    },
+    "ja": {
+      "audioFile": "voiceover/solar-system-ja.mp3",
+      "durationSeconds": 116.688,
+      "durationFrames": 3501,
+      "edgeTTSDuration": 116.60156500000001,
+      "segments": {
+        "Sun": {
+          "start": 3,
+          "end": 132
+        },
+        "Mercury": {
+          "start": 130,
+          "end": 230
+        },
+        "Venus": {
+          "start": 230,
+          "end": 480
+        },
+        "Earth": {
+          "start": 480,
+          "end": 594
+        },
+        "Mars": {
+          "start": 594,
+          "end": 815
+        },
+        "Jupiter": {
+          "start": 815,
+          "end": 888
+        },
+        "Saturn": {
+          "start": 888,
+          "end": 1107
+        },
+        "Uranus": {
+          "start": 1107,
+          "end": 1175
+        },
+        "Neptune": {
+          "start": 1175,
+          "end": 1491
+        },
+        "Finale": {
+          "start": 1491,
+          "end": 1594
+        }
+      },
+      "timing": [
+        {
+          "type": "SentenceBoundary",
+          "offset": 0.1,
+          "duration": 4.2989584,
+          "text": "太陽から、太陽系の旅を始めましょう。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 4.3489584,
+          "duration": 3.3333334,
+          "text": "太陽は私たちの恒星です。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 7.6822918,
+          "duration": 8.3072918,
+          "text": "高温のプラズマでできた輝く球体で、その重力がすべての惑星を軌道につなぎとめています。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 15.9895836,
+          "duration": 3.8020834,
+          "text": "太陽に最も近いのは水星です。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 19.7916671,
+          "duration": 7.3697918,
+          "text": "最も小さな惑星で、強烈な熱と長い寒い夜のあいだを素早く進みます。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 27.1614589,
+          "duration": 2.4348958,
+          "text": "次は金星です。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 29.5963548,
+          "duration": 7.3046876,
+          "text": "私たちの空で明るく見え、厚い雲と強い温室効果の大気に包まれています。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 36.9010424,
+          "duration": 2.2526042,
+          "text": "そして地球です。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 39.1536467,
+          "duration": 10.5338544,
+          "text": "私たちの青い故郷には、液体の水、生命を支える環境、守ってくれる大気、そして一つの月があります。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 49.6875011,
+          "duration": 3.4505209,
+          "text": "地球の外側には火星があります。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 53.138022,
+          "duration": 8.3854168,
+          "text": "赤い惑星には、砂嵐、古い川の跡、そして太陽系で最も高い火山があります。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 61.5234388,
+          "duration": 3.5546875,
+          "text": "さらに外側には木星があります。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 65.0781264,
+          "duration": 8.0208335,
+          "text": "最大の惑星で、縞模様の雲、巨大な嵐、そして多くの衛星を持っています。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 73.0989599,
+          "duration": 3.046875,
+          "text": "次に現れるのは土星です。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 76.145835,
+          "duration": 5.2343751,
+          "text": "広い氷の環と、やわらかな金色でよく知られています。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 81.3802101,
+          "duration": 2.8776042,
+          "text": "その次は天王星です。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 84.2578143,
+          "duration": 9.0234377,
+          "text": "冷たい青緑色の氷巨大惑星で、大きく傾き、まるで横倒しで太陽を回っているように見えます。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 93.281252,
+          "duration": 4.4270834,
+          "text": "主要な惑星の外縁には海王星があります。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 97.7083355,
+          "duration": 5.7291667,
+          "text": "深い青色で風が強く、遠い暗闇の中を回っています。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 103.4375023,
+          "duration": 2.6171875,
+          "text": "これらが太陽系です。"
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 106.0546898,
+          "duration": 10.5468752,
+          "text": "一つの恒星、八つの惑星、月、環、小惑星、彗星、そして静かな軌道のリズムが共に動いています。"
+        }
+      ]
+    },
+    "ko": {
+      "audioFile": "voiceover/solar-system-ko.mp3",
+      "durationSeconds": 110.88,
+      "durationFrames": 3326,
+      "edgeTTSDuration": 110.7942732,
+      "segments": {
+        "Sun": {
+          "start": 3,
+          "end": 112
+        },
+        "Mercury": {
+          "start": 111,
+          "end": 191
+        },
+        "Venus": {
+          "start": 191,
+          "end": 417
+        },
+        "Earth": {
+          "start": 417,
+          "end": 532
+        },
+        "Mars": {
+          "start": 532,
+          "end": 740
+        },
+        "Jupiter": {
+          "start": 740,
+          "end": 812
+        },
+        "Saturn": {
+          "start": 812,
+          "end": 1033
+        },
+        "Uranus": {
+          "start": 1033,
+          "end": 1105
+        },
+        "Neptune": {
+          "start": 1105,
+          "end": 1385
+        },
+        "Finale": {
+          "start": 1385,
+          "end": 1473
+        }
+      },
+      "timing": [
+        {
+          "type": "SentenceBoundary",
+          "offset": 0.1,
+          "duration": 3.6479167,
+          "text": "태양에서부터 태양계 여행을 시작합니다."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 3.6979167,
+          "duration": 2.6822917,
+          "text": "태양은 우리의 별입니다."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 6.3802084,
+          "duration": 7.5260418,
+          "text": "뜨거운 플라스마로 이루어진 빛나는 구체이며, 강한 중력으로 모든 행성을 궤도에 붙잡아 둡니다."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 13.9062503,
+          "duration": 3.828125,
+          "text": "태양에 가장 가까운 곳에는 수성이 있습니다."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 17.7343753,
+          "duration": 6.9270834,
+          "text": "수성은 가장 작은 행성으로, 강렬한 열과 긴 추운 밤 사이를 빠르게 움직입니다."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 24.6614588,
+          "duration": 2.4088542,
+          "text": "다음은 금성입니다."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 27.0703131,
+          "duration": 7.3697918,
+          "text": "금성은 우리 하늘에서 밝게 보이며, 두꺼운 구름과 강한 온실 대기에 둘러싸여 있습니다."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 34.4401049,
+          "duration": 2.3828125,
+          "text": "그다음은 지구입니다."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 36.8229174,
+          "duration": 9.3489585,
+          "text": "우리의 푸른 집에는 액체 물, 생명 시스템, 보호하는 대기, 그리고 안정적으로 함께하는 하나의 달이 있습니다."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 46.171876,
+          "duration": 2.9427083,
+          "text": "지구 너머에는 화성이 있습니다."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 49.1145844,
+          "duration": 8.4895835,
+          "text": "붉은 행성 화성에는 먼지 폭풍, 오래된 강의 흔적, 그리고 태양계에서 가장 높은 화산이 있습니다."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 57.6041679,
+          "duration": 3.0338542,
+          "text": "더 멀리에는 목성이 있습니다."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 60.6380221,
+          "duration": 8.3333335,
+          "text": "목성은 가장 큰 행성으로, 줄무늬 구름, 거대한 폭풍, 그리고 많은 위성을 가지고 있습니다."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 68.9713557,
+          "duration": 3.0989584,
+          "text": "그다음에는 토성이 나타납니다."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 72.0703141,
+          "duration": 5.0130209,
+          "text": "토성은 넓은 얼음 고리와 부드러운 황금빛으로 유명합니다."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 77.083335,
+          "duration": 2.5911458,
+          "text": "다음은 천왕성입니다."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 79.6744809,
+          "duration": 8.059896,
+          "text": "차가운 청록색 얼음 거대 행성으로, 크게 기울어져 마치 옆으로 누운 채 태양을 도는 것처럼 보입니다."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 87.7343769,
+          "duration": 4.6614584,
+          "text": "주요 행성의 가장 먼 가장자리에는 해왕성이 있습니다."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 92.3958353,
+          "duration": 6.0286459,
+          "text": "짙푸르고 바람이 거센 행성으로, 먼 어둠 속에서 태양을 돌고 있습니다."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 98.4244813,
+          "duration": 2.8776042,
+          "text": "이 모든 것이 태양계입니다."
+        },
+        {
+          "type": "SentenceBoundary",
+          "offset": 101.3020855,
+          "duration": 9.4921877,
+          "text": "하나의 별, 여덟 행성, 달, 고리, 소행성, 혜성, 그리고 조용히 이어지는 궤도의 리듬입니다."
+        }
+      ]
+    }
+  },
+  "boundary": "SentenceBoundary"
+}

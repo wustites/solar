@@ -69,7 +69,88 @@ The Edge TTS path includes a Windows DNS resolver workaround for `aiohttp`. The 
 path reads `GOOGLE_TTS_API_KEY` first, then the configured key file, which defaults
 to `google-tts.key`.
 
-## 4. Match Duration
+## 4. Audio Synchronization
+
+The project uses automatic audio synchronization to align text overlays with voiceover timing. The system supports two analysis methods:
+
+### Edge TTS Time Boundary (Recommended)
+
+Edge TTS provides built-in boundary detection with precise timing. This method:
+- Uses the TTS engine's internal timing data
+- Provides more accurate boundaries
+- Works directly with the text content
+
+To sync using Edge TTS:
+
+```bash
+# Sentence-level boundaries (default, recommended)
+python scripts/sync_audio.py --method edge-tts --boundary SentenceBoundary
+
+# Word-level boundaries (more detailed, but segments may be too short)
+python scripts/sync_audio.py --method edge-tts --boundary WordBoundary
+```
+
+**Boundary Types:**
+- `SentenceBoundary`: Groups text by sentences (recommended for this project)
+- `WordBoundary`: Groups text by individual words (more granular)
+
+### Silence Detection (Fallback)
+
+For pre-generated audio files, silence detection analyzes audio patterns:
+
+```bash
+python scripts/sync_audio.py --method silence
+```
+
+### Configuration File
+
+Audio timing is stored in:
+
+```text
+audio-sync.json
+```
+
+This file contains:
+- FPS setting (default: 30)
+- Boundary type used
+- Per-language audio configuration
+- Segment timing in frames for each planet/section
+- Audio duration information
+- Edge TTS timing data (when using edge-tts method)
+
+### Manual Timing Adjustment
+
+If automatic detection needs fine-tuning, edit `audio-sync.json` directly:
+
+```json
+{
+  "languages": {
+    "en": {
+      "segments": {
+        "Sun": { "start": 0, "end": 94 },
+        "Mercury": { "start": 94, "end": 294 }
+      }
+    }
+  }
+}
+```
+
+### Regenerating Audio
+
+After changing narration text, regenerate voiceover and resync:
+
+```bash
+# Regenerate voiceover
+npm run voiceover
+
+# Resync timing
+python scripts/sync_audio.py --method edge-tts
+
+# Preview changes
+npm run start
+```
+
+### Duration Verification
 
 Check generated MP3 lengths:
 
@@ -86,7 +167,7 @@ Check the Remotion composition lengths:
 npx remotion compositions src/index.ts
 ```
 
-The current compositions are `SolarSystemEN`, `SolarSystemZH`, `SolarSystemJA`, and `SolarSystemKO`, each 30fps, 2340 frames, 78 seconds. If any voiceover becomes longer, update `durationInFrames` in `src/narration.ts`.
+The composition durations are automatically set from `audio-sync.json`. If any voiceover becomes longer, run `python scripts/sync_audio.py` to update timing.
 
 ## 5. Preview
 
