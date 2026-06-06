@@ -334,12 +334,12 @@ export const SolarSystem: React.FC<SolarSystemProps> = ({language}) => {
     scene.add(createStarField(420, 0.22, 0.48, sceneSeed + 41));
 
     planetRefs.current = planets.map((spec, planetIndex) => {
-      const orbit = createOrbitRing(spec.distance);
-      scene.add(orbit);
-
       const group = new THREE.Group();
       group.rotation.z = spec.tilt;
       scene.add(group);
+
+      const orbit = createOrbitRing(spec.distance);
+      group.add(orbit);
 
       const texture = makePlanetTexture(
         spec.color,
