@@ -16,6 +16,14 @@ export const RemotionRoot: React.FC = () => {
           width={1920}
           height={1080}
           defaultProps={{language}}
+          calculateMetadata={async () => {
+            return {
+              durationInFrames: locales[language].durationInFrames,
+              fps,
+              width: 1920,
+              height: 1080,
+            };
+          }}
         />
       ))}
     </>

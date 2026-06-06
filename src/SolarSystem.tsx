@@ -8,7 +8,7 @@ import {
   useVideoConfig
 } from 'remotion';
 import * as THREE from 'three';
-import {Language, locales} from './narration';
+import {Language, locales, fps} from './narration';
 
 type PlanetSpec = {
   name: string;
@@ -221,6 +221,10 @@ export const SolarSystem: React.FC<SolarSystemProps> = ({language}) => {
       extrapolateRight: 'clamp'
     }
   );
+
+  const currentTime = frame / fps;
+  const segmentStartTime = activeSegment.start / fps;
+  const segmentEndTime = activeSegment.end / fps;
 
   const titleOpacity = interpolate(frame, [0, 45, 520, 580], [0, 1, 1, 0], {
     extrapolateLeft: 'clamp',
@@ -616,6 +620,44 @@ export const SolarSystem: React.FC<SolarSystemProps> = ({language}) => {
               borderRadius: 999
             }}
           />
+        </div>
+      </AbsoluteFill>
+      <AbsoluteFill
+        style={{
+          top: 10,
+          left: 10,
+          right: 'auto',
+          bottom: 'auto',
+          width: 'auto',
+          height: 'auto',
+          padding: '12px 16px',
+          background: 'rgba(0,0,0,0.7)',
+          borderRadius: 8,
+          pointerEvents: 'none',
+          fontFamily: 'monospace',
+          fontSize: 12,
+          lineHeight: 1.5,
+          color: '#00ff88',
+          zIndex: 1000
+        }}
+      >
+        <div style={{marginBottom: 4}}>
+          <span style={{color: '#888'}}>Language:</span> {language.toUpperCase()}
+        </div>
+        <div style={{marginBottom: 4}}>
+          <span style={{color: '#888'}}>Frame:</span> {frame} / {durationInFrames}
+        </div>
+        <div style={{marginBottom: 4}}>
+          <span style={{color: '#888'}}>Time:</span> {currentTime.toFixed(2)}s / {(durationInFrames / fps).toFixed(2)}s
+        </div>
+        <div style={{marginBottom: 4}}>
+          <span style={{color: '#888'}}>Segment:</span> {activeSegment.name}
+        </div>
+        <div style={{marginBottom: 4}}>
+          <span style={{color: '#888'}}>Segment Time:</span> {segmentStartTime.toFixed(2)}s - {segmentEndTime.toFixed(2)}s
+        </div>
+        <div>
+          <span style={{color: '#888'}}>Progress:</span> {(segmentProgress * 100).toFixed(0)}%
         </div>
       </AbsoluteFill>
     </AbsoluteFill>
