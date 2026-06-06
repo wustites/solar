@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2026-06-06T13:42:57.800379Z",
+  "lastUpdated": "2026-06-06T22:19:38.050137",
   "fps": 30,
   "languages": {
     "en": {
@@ -11,43 +11,43 @@
       "segments": {
         "Sun": {
           "start": 3,
-          "end": 122
-        },
-        "Mercury": {
-          "start": 120,
           "end": 321
         },
-        "Venus": {
+        "Mercury": {
           "start": 321,
           "end": 542
         },
-        "Earth": {
+        "Venus": {
           "start": 542,
           "end": 746
         },
-        "Mars": {
+        "Earth": {
           "start": 746,
           "end": 937
         },
-        "Jupiter": {
+        "Mars": {
           "start": 937,
           "end": 1191
         },
-        "Saturn": {
+        "Jupiter": {
           "start": 1191,
           "end": 1418
         },
-        "Uranus": {
+        "Saturn": {
           "start": 1418,
           "end": 1595
         },
-        "Neptune": {
+        "Uranus": {
           "start": 1595,
           "end": 1807
         },
-        "Finale": {
+        "Neptune": {
           "start": 1807,
           "end": 2005
+        },
+        "Finale": {
+          "start": 2005,
+          "end": 2292
         }
       },
       "timing": [
@@ -127,43 +127,43 @@
       "segments": {
         "Sun": {
           "start": 3,
-          "end": 118
-        },
-        "Mercury": {
-          "start": 116,
-          "end": 180
-        },
-        "Venus": {
-          "start": 180,
           "end": 425
         },
-        "Earth": {
+        "Mercury": {
           "start": 425,
-          "end": 505
-        },
-        "Mars": {
-          "start": 505,
           "end": 684
         },
-        "Jupiter": {
+        "Venus": {
           "start": 684,
-          "end": 736
-        },
-        "Saturn": {
-          "start": 736,
           "end": 938
         },
-        "Uranus": {
+        "Earth": {
           "start": 938,
-          "end": 992
-        },
-        "Neptune": {
-          "start": 992,
           "end": 1244
         },
-        "Finale": {
+        "Mars": {
           "start": 1244,
-          "end": 1310
+          "end": 1490
+        },
+        "Jupiter": {
+          "start": 1490,
+          "end": 1720
+        },
+        "Saturn": {
+          "start": 1720,
+          "end": 1926
+        },
+        "Uranus": {
+          "start": 1926,
+          "end": 2195
+        },
+        "Neptune": {
+          "start": 2195,
+          "end": 2444
+        },
+        "Finale": {
+          "start": 2444,
+          "end": 2777
         }
       },
       "timing": [
@@ -303,43 +303,43 @@
       "segments": {
         "Sun": {
           "start": 3,
-          "end": 132
-        },
-        "Mercury": {
-          "start": 130,
-          "end": 230
-        },
-        "Venus": {
-          "start": 230,
           "end": 480
         },
-        "Earth": {
+        "Mercury": {
           "start": 480,
-          "end": 594
-        },
-        "Mars": {
-          "start": 594,
           "end": 815
         },
-        "Jupiter": {
+        "Venus": {
           "start": 815,
-          "end": 888
-        },
-        "Saturn": {
-          "start": 888,
           "end": 1107
         },
-        "Uranus": {
+        "Earth": {
           "start": 1107,
-          "end": 1175
-        },
-        "Neptune": {
-          "start": 1175,
           "end": 1491
         },
-        "Finale": {
+        "Mars": {
           "start": 1491,
-          "end": 1594
+          "end": 1846
+        },
+        "Jupiter": {
+          "start": 1846,
+          "end": 2193
+        },
+        "Saturn": {
+          "start": 2193,
+          "end": 2441
+        },
+        "Uranus": {
+          "start": 2441,
+          "end": 2798
+        },
+        "Neptune": {
+          "start": 2798,
+          "end": 3103
+        },
+        "Finale": {
+          "start": 3103,
+          "end": 3498
         }
       },
       "timing": [
@@ -479,43 +479,43 @@
       "segments": {
         "Sun": {
           "start": 3,
-          "end": 112
-        },
-        "Mercury": {
-          "start": 111,
-          "end": 191
-        },
-        "Venus": {
-          "start": 191,
           "end": 417
         },
-        "Earth": {
+        "Mercury": {
           "start": 417,
-          "end": 532
-        },
-        "Mars": {
-          "start": 532,
           "end": 740
         },
-        "Jupiter": {
+        "Venus": {
           "start": 740,
-          "end": 812
-        },
-        "Saturn": {
-          "start": 812,
           "end": 1033
         },
-        "Uranus": {
+        "Earth": {
           "start": 1033,
-          "end": 1105
-        },
-        "Neptune": {
-          "start": 1105,
           "end": 1385
         },
-        "Finale": {
+        "Mars": {
           "start": 1385,
-          "end": 1473
+          "end": 1728
+        },
+        "Jupiter": {
+          "start": 1728,
+          "end": 2069
+        },
+        "Saturn": {
+          "start": 2069,
+          "end": 2313
+        },
+        "Uranus": {
+          "start": 2313,
+          "end": 2632
+        },
+        "Neptune": {
+          "start": 2632,
+          "end": 2953
+        },
+        "Finale": {
+          "start": 2953,
+          "end": 3324
         }
       },
       "timing": [
