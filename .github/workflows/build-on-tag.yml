@@ -53,7 +53,12 @@ jobs:
         run: npm run typecheck
 
       - name: Render video
-        run: npm run render
+        run: |
+          if [[ "${{ github.ref_name }}" == *"-vert" ]]; then
+            npm run render:vertical
+          else
+            npm run render
+          fi
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

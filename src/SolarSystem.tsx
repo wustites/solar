@@ -185,7 +185,6 @@ const disposeObject = (object: THREE.Object3D) => {
 
 type SolarSystemProps = {
   language: Language;
-  layout?: 'horizontal' | 'vertical';
 };
 
 const getActiveSegment = (frame: number, language: Language) => {
@@ -202,7 +201,7 @@ const smoothstep = (value: number) => {
   return clamped * clamped * (3 - 2 * clamped);
 };
 
-export const SolarSystem: React.FC<SolarSystemProps> = ({language, layout = 'horizontal'}) => {
+export const SolarSystem: React.FC<SolarSystemProps> = ({language}) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
@@ -263,10 +262,8 @@ export const SolarSystem: React.FC<SolarSystemProps> = ({language, layout = 'hor
     scene.fog = new THREE.FogExp2('#02040b', 0.012);
     sceneRef.current = scene;
 
-    const isVertical = layout === 'vertical';
-    const cameraFov = isVertical ? 56 : 46;
-    const camera = new THREE.PerspectiveCamera(cameraFov, width / height, 0.1, 1000);
-    camera.position.set(0, isVertical ? 12 : 10, isVertical ? 28 : 24);
+    const camera = new THREE.PerspectiveCamera(56, width / height, 0.1, 1000);
+    camera.position.set(0, 12, 28);
     camera.lookAt(0, 0, 0);
     cameraRef.current = camera;
 
@@ -509,23 +506,20 @@ export const SolarSystem: React.FC<SolarSystemProps> = ({language, layout = 'hor
     }
 
     const activeIsPlanet = active.name !== 'Sun' && active.name !== 'Finale';
-    const isVertical = layout === 'vertical';
-    const cameraRadiusMultiplier = isVertical ? 8.5 : 7.5;
     const cameraRadius = activeIsPlanet
-      ? Math.max(isVertical ? 7.5 : 6.5, activeRadius * cameraRadiusMultiplier)
-      : interpolate(frame, [0, 240, durationInFrames * 0.58, durationInFrames], 
-          isVertical ? [26, 20, 23, 28] : [22, 16, 19, 24], {
+      ? Math.max(7.5, activeRadius * 8.5)
+      : interpolate(frame, [0, 240, durationInFrames * 0.58, durationInFrames], [26, 20, 23, 28], {
           extrapolateLeft: 'clamp',
           extrapolateRight: 'clamp'
         });
-    const wideOffset = active.name === 'Finale' ? (isVertical ? 16 : 20) : 0;
+    const wideOffset = active.name === 'Finale' ? 16 : 0;
     const orbitAngle =
       cameraSweep * (activeIsPlanet ? 1.8 : 0.6) + Math.sin(frame * 0.005) * 0.15;
 
     const targetY = activeIsPlanet 
-      ? (isVertical ? 2.5 : 2.0) + activeRadius * (isVertical ? 3.0 : 2.5)
-      : (isVertical ? 9.0 : 7.5) + Math.sin(cameraSweep * 1.1) * (isVertical ? 2.5 : 2.0);
-    const targetZ = target.z + Math.cos(orbitAngle) * cameraRadius + (active.name === 'Finale' ? (isVertical ? 20 : 16) : 0);
+      ? 2.5 + activeRadius * 3.0
+      : 9.0 + Math.sin(cameraSweep * 1.1) * 2.5;
+    const targetZ = target.z + Math.cos(orbitAngle) * cameraRadius + (active.name === 'Finale' ? 20 : 0);
     
     camera.position.set(
       target.x + Math.sin(orbitAngle) * cameraRadius + wideOffset,
@@ -533,14 +527,11 @@ export const SolarSystem: React.FC<SolarSystemProps> = ({language, layout = 'hor
       targetZ
     );
     camera.lookAt(target);
-    const isVerticalLayout = layout === 'vertical';
-    camera.fov = activeIsPlanet 
-      ? (isVerticalLayout ? 42 : 38) 
-      : (isVerticalLayout ? 52 : 44);
+    camera.fov = activeIsPlanet ? 42 : 52;
     camera.updateProjectionMatrix();
 
     renderer.render(scene, camera);
-  }, [durationInFrames, frame, language, layout]);
+  }, [durationInFrames, frame, language]);
 
   return (
     <AbsoluteFill style={{backgroundColor: '#02040b'}}>
@@ -566,7 +557,7 @@ export const SolarSystem: React.FC<SolarSystemProps> = ({language, layout = 'hor
       <AbsoluteFill
         style={{
           justifyContent: 'flex-end',
-          padding: layout === 'vertical' ? '40px 48px 80px' : 72,
+          padding: '40px 48px 80px',
           background:
             'linear-gradient(180deg, rgba(2,4,11,0) 42%, rgba(2,4,11,0.58) 100%)',
           pointerEvents: 'none'
@@ -583,11 +574,11 @@ export const SolarSystem: React.FC<SolarSystemProps> = ({language, layout = 'hor
         >
           <div
             style={{
-              fontSize: layout === 'vertical' ? 20 : 24,
+              fontSize: 20,
               lineHeight: 1.2,
               letterSpacing: 2,
               color: '#8fa8c8',
-              marginBottom: layout === 'vertical' ? 12 : 16,
+              marginBottom: 12,
               textTransform: 'uppercase'
             }}
           >
@@ -595,7 +586,7 @@ export const SolarSystem: React.FC<SolarSystemProps> = ({language, layout = 'hor
           </div>
           <div
             style={{
-              fontSize: layout === 'vertical' ? 72 : 92,
+              fontSize: 72,
               lineHeight: 0.92,
               fontWeight: 900,
               letterSpacing: -1
@@ -609,7 +600,7 @@ export const SolarSystem: React.FC<SolarSystemProps> = ({language, layout = 'hor
         style={{
           justifyContent: 'flex-start',
           alignItems: 'flex-start',
-          padding: layout === 'vertical' ? '60px 48px' : 72,
+          padding: '60px 48px',
           pointerEvents: 'none'
         }}
       >
@@ -617,7 +608,7 @@ export const SolarSystem: React.FC<SolarSystemProps> = ({language, layout = 'hor
           style={{
             opacity: segmentProgress,
             transform: `translateY(${interpolate(segmentProgress, [0, 1], [16, 0])}px)`,
-            width: layout === 'vertical' ? '85%' : 580,
+            width: '85%',
             color: '#f7fbff',
             fontFamily,
             textShadow: '0 6px 24px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.4)'
@@ -625,18 +616,18 @@ export const SolarSystem: React.FC<SolarSystemProps> = ({language, layout = 'hor
         >
           <div
             style={{
-              fontSize: layout === 'vertical' ? 52 : 68,
+              fontSize: 52,
               lineHeight: 0.95,
               fontWeight: 900,
               letterSpacing: -1,
-              marginBottom: layout === 'vertical' ? 16 : 20
+              marginBottom: 16
             }}
           >
             {activeSegment.title}
           </div>
           <div
             style={{
-              fontSize: layout === 'vertical' ? 22 : 26,
+              fontSize: 22,
               lineHeight: 1.4,
               letterSpacing: 0.2,
               color: '#b8c8e0'
@@ -649,13 +640,13 @@ export const SolarSystem: React.FC<SolarSystemProps> = ({language, layout = 'hor
       <AbsoluteFill
         style={{
           justifyContent: 'flex-end',
-          padding: layout === 'vertical' ? '0 48px 60px' : '0 72px 44px',
+          padding: '0 48px 60px',
           pointerEvents: 'none'
         }}
       >
         <div
           style={{
-            width: layout === 'vertical' ? 280 : 360,
+            width: 280,
             height: 3,
             borderRadius: 999,
             background: 'rgba(176,199,232,0.16)',
